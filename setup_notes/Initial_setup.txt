@@ -1,0 +1,514 @@
+CyberRoleFit Pipeline - Initial Setup Notes
+
+# Project Overview
+
+Project Name:
+CyberRoleFit Pipeline
+
+Purpose:
+CyberRoleFit Pipeline is a Python and Streamlit project designed to help analyze cybersecurity and networking job postings.
+
+The long-term goal is to collect job postings, identify required years of experience, detect clearance requirements, compare job descriptions against my skills, and score roles as Apply, Maybe, Skip, or Reject.
+
+Project Location:
+C:\Users\JediN\Projects\cyber-rolefit-pipeline
+
+===========================================
+# Section 1 - Tools Installed
+===========================================
+
+Tools installed on the computer:
+
+1. Python
+2. Git
+3. Visual Studio Code
+4. DB Browser for SQLite - optional, but helpful
+
+Purpose of each tool:
+
+Python:
+Used to run the CyberRoleFit project and install packages.
+
+Git:
+Used for version control and future GitHub uploads.
+
+Visual Studio Code:
+Used as the main code editor.
+
+DB Browser for SQLite:
+Used to visually inspect the SQLite database later when the project starts storing job data.
+
+===========================================
+# Section 2 - Python Verification
+===========================================
+
+Purpose:
+Confirm that Python is installed and can run from the terminal.
+
+Commands used:
+
+python --version
+
+Alternative command if needed:
+
+py --version
+
+Purpose of command:
+Checks the installed Python version.
+
+Expected result:
+The terminal should return a Python version, such as:
+
+Python 3.14.x
+
+or another installed Python version.
+
+# Section 3 - Git Verification
+
+Purpose:
+Confirm that Git is installed and available from the terminal.
+
+Command used:
+
+git --version
+
+Purpose of command:
+Checks the installed Git version.
+
+Expected result:
+The terminal should return something similar to:
+
+git version 2.xx.x.windows.x
+
+# Section 4 - Git Identity Setup
+
+Purpose:
+Configure Git with my name and email for future commits.
+
+Commands used:
+
+git config --global user.name "Ross Govan"
+
+git config --global user.email "[your-email@example.com](mailto:your-email@example.com)"
+
+Note:
+The email should match the email I plan to use with GitHub.
+
+===========================================
+# Section 5 - Project Folder Creation
+===========================================
+
+Purpose:
+Create a dedicated folder for the CyberRoleFit project.
+
+Commands used:
+
+mkdir "$HOME\Projects"
+
+cd "$HOME\Projects"
+
+mkdir cyber-rolefit-pipeline
+
+cd cyber-rolefit-pipeline
+
+Final project path:
+
+C:\Users\JediN\Projects\cyber-rolefit-pipeline
+
+===========================================
+# Section 6 - Opening Project in VS Code
+===========================================
+
+Purpose:
+Open the CyberRoleFit project folder inside Visual Studio Code.
+
+Command used:
+
+code .
+
+Alternative method:
+Open VS Code manually, then go to:
+
+File > Open Folder
+
+Then select:
+
+C:\Users\JediN\Projects\cyber-rolefit-pipeline
+
+===========================================
+# Section 7 - Python Virtual Environment Creation
+===========================================
+
+Purpose:
+Create an isolated Python environment for this specific project.
+
+Command used:
+
+python -m venv .venv
+
+Alternative command:
+
+py -m venv .venv
+
+Purpose of command:
+Creates a virtual environment folder named:
+
+.venv
+
+Why this matters:
+The virtual environment keeps this project's Python packages separate from other Python projects on the computer.
+
+# Section 8 - Virtual Environment Activation
+
+Purpose:
+Activate the project-specific Python environment.
+
+Command used:
+
+..venv\Scripts\Activate.ps1
+
+Expected result:
+The terminal should show:
+
+(.venv)
+
+Example:
+
+(.venv) PS C:\Users\JediN\Projects\cyber-rolefit-pipeline>
+
+Why this matters:
+The (.venv) confirms that package installs and Python commands are running inside the project environment.
+
+===========================================
+# Section 9 - Fixing PowerShell Script Activation If Blocked
+===========================================
+
+Purpose:
+Allow PowerShell to activate the virtual environment if script execution is blocked.
+
+Command used only if needed:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Then try activating again:
+
+..venv\Scripts\Activate.ps1
+
+===========================================
+# Section 10 - Upgrading pip
+===========================================
+
+Purpose:
+Upgrade pip before installing project packages.
+
+Command used:
+
+python -m pip install --upgrade pip
+
+Why this matters:
+pip is the Python package installer. Upgrading it helps avoid install issues.
+
+===========================================
+# Section 11 - Installing Starter Python Packages
+===========================================
+
+Purpose:
+Install the starter packages needed for the CyberRoleFit project.
+
+Command used:
+
+pip install streamlit pandas requests python-dotenv beautifulsoup4 lxml
+
+Packages installed:
+
+streamlit:
+Used to build the web dashboard.
+
+pandas:
+Used to work with job data in table/dataframe format.
+
+requests:
+Used to call job APIs and retrieve web data.
+
+python-dotenv:
+Used to manage API keys and environment variables later.
+
+beautifulsoup4:
+Used to parse HTML if needed.
+
+lxml:
+Used as a parser for HTML/XML content if needed.
+
+===========================================
+# Section 12 - Testing Streamlit
+===========================================
+
+Purpose:
+Confirm Streamlit installed correctly.
+
+Command used:
+
+streamlit hello
+
+Expected result:
+A browser window opens and shows the Streamlit demo app.
+
+To stop Streamlit:
+Return to the terminal and press:
+
+Ctrl + C
+
+===========================================
+# Section 13 - Creating the First Streamlit App
+===========================================
+
+Purpose:
+Create the first working CyberRoleFit dashboard test file.
+
+File created:
+
+app.py
+
+Code added:
+
+import streamlit as st
+import pandas as pd
+
+st.title("CyberRoleFit Pipeline")
+
+st.write("This dashboard will analyze cybersecurity and networking job postings.")
+
+sample_jobs = pd.DataFrame(
+[
+{
+"title": "SOC Analyst II",
+"company": "Example Company",
+"location": "Dallas, TX",
+"years_required": "2+",
+"clearance_required": "No",
+"fit_score": 86,
+"decision": "Apply",
+},
+{
+"title": "Senior Security Engineer",
+"company": "Example Company",
+"location": "Remote",
+"years_required": "7+",
+"clearance_required": "No",
+"fit_score": 42,
+"decision": "Skip",
+},
+]
+)
+
+st.dataframe(sample_jobs)
+
+===========================================
+# Section 14 - Running the First Streamlit App
+===========================================
+
+Purpose:
+Launch the first CyberRoleFit dashboard.
+
+Command used:
+
+streamlit run app.py
+
+Expected result:
+The browser opens and displays:
+
+CyberRoleFit Pipeline
+
+The page also shows a small sample table with two jobs:
+
+1. SOC Analyst II
+2. Senior Security Engineer
+
+This confirmed that Streamlit, Python, pandas, and the project environment are working correctly.
+
+To stop the app:
+Return to the terminal and press:
+
+Ctrl + C
+
+===========================================
+# Section 15 - Creating requirements.txt
+===========================================
+
+Purpose:
+Save the list of installed Python packages for the project.
+
+Command used:
+
+pip freeze > requirements.txt
+
+Purpose of requirements.txt:
+This file allows the project environment to be recreated later on another machine, GitHub, or Streamlit Community Cloud.
+
+===========================================
+# Section 16 - Creating Project Folders
+===========================================
+
+Purpose:
+Create the main folder structure for the project.
+
+Commands used:
+
+mkdir src
+
+mkdir data
+
+mkdir notebooks
+
+Purpose of each folder:
+
+src:
+Stores Python source code files, such as scoring logic, parsing functions, and API collectors.
+
+data:
+Stores project data, such as a future SQLite database named jobs.db.
+
+notebooks:
+Stores Jupyter notebooks used for testing, exploring, and experimenting with parsing or scoring logic.
+
+===========================================
+# Section 17 - Current Project Structure
+===========================================
+
+Current folder structure:
+
+cyber-rolefit-pipeline/
+|
+|-- .venv/
+|-- data/
+|-- notebooks/
+|-- src/
+|-- app.py
+|-- requirements.txt
+|-- setup_notes.txt
+
+Purpose of current files:
+
+app.py:
+The first working Streamlit dashboard.
+
+requirements.txt:
+The saved list of installed Python packages.
+
+setup_notes.txt:
+This project setup journal.
+
+===========================================
+# Section 18 - Current Status
+===========================================
+
+Current status:
+The basic Python, VS Code, virtual environment, package installation, and Streamlit dashboard setup is working.
+
+Confirmed working:
+
+* Python runs from the terminal.
+* The virtual environment activates.
+* Streamlit runs successfully.
+* The CyberRoleFit dashboard opens in the browser.
+* The sample job table displays correctly.
+* requirements.txt was created.
+* Project folders were created.
+
+# Section 19 - Next Planned Step
+
+Next planned task:
+Create the first scoring module inside the src folder.
+
+Planned file:
+
+src/score_jobs.py
+
+Purpose of score_jobs.py:
+This file will score job postings based on:
+
+* Cybersecurity and networking keyword matches
+* Required years of experience
+* Clearance requirements
+* Seniority level
+* Overall fit for my background
+
+Future scoring categories:
+
+Apply:
+Strong match for my background.
+
+Maybe:
+Possible match, but may require some review.
+
+Skip:
+Poor fit due to seniority, missing skills, or unrealistic requirements.
+
+Reject:
+Automatically reject due to active clearance requirements or other hard blockers.
+
+===========================================
+Section 19 - First Scoring Module Completed
+===========================================
+
+Purpose:
+Created the first job scoring module for the CyberRoleFit Pipeline.
+
+File created:
+
+src/score_jobs.py
+
+Purpose of score_jobs.py:
+The file contains a score_job function that analyzes a job posting and returns:
+- fit_score
+- decision
+- reasons
+
+The scoring logic currently checks for:
+- Cybersecurity and networking keyword matches
+- Entry-level and mid-level experience signals
+- Senior-level signals
+- Active clearance requirements
+
+The app.py file was updated to:
+- Import the score_job function
+- Score sample job postings
+- Display scored jobs in a Streamlit table
+- Allow selecting a job from a dropdown
+- Show scoring reasons for the selected job
+
+Command used to run the app:
+
+streamlit run app.py
+
+Current status:
+The CyberRoleFit dashboard now includes basic job scoring logic.
+
+=========================================
+Section 20 - Adzuna Integration Completed
+=========================================
+
+Purpose:
+Connected CyberRoleFit Pipeline to the Adzuna Job Search API.
+
+What was completed:
+- Created a .env file to store Adzuna credentials.
+- Created a .gitignore file to protect the .env file from being uploaded to GitHub.
+- Created src/collect_adzuna.py to collect job postings from Adzuna.
+- Created test_adzuna.py to test the Adzuna API connection.
+- Successfully ran the Adzuna test file.
+- Confirmed that real job postings were returned from Adzuna.
+- Updated app.py to connect the Streamlit dashboard to Adzuna.
+- Successfully searched for SOC Analyst jobs in Dallas, TX.
+- Confirmed that real Adzuna job postings display in the CyberRoleFit dashboard.
+- Confirmed that the app scores real postings using the score_job function.
+- Confirmed that the app displays job details, scoring reasons, and an Open Job Posting button.
+
+Commands used:
+
+python test_adzuna.py
+
+streamlit run app.py
+
+Current status:
+CyberRoleFit can now pull real job postings from Adzuna, score them, and display them in the Streamlit dashboard.
